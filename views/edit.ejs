@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Message | Mini WhatsApp</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/edit.css">
+</head>
+
+<body class="edit-page">
+
+    <!-- Decorative Background -->
+    <div class="ambient ambient-1"></div>
+    <div class="ambient ambient-2"></div>
+    <div class="ambient ambient-3"></div>
+
+    <main class="edit-container">
+
+        <!-- Top Navigation -->
+        <nav class="edit-nav">
+
+            <a href="/chats" class="back-button">
+                <span>←</span>
+                <span>All Chats</span>
+            </a>
+
+            <div class="nav-brand">
+                <span class="brand-dot"></span>
+                Mini WhatsApp
+            </div>
+
+        </nav>
+
+
+        <!-- Main Editor -->
+        <section class="editor-card">
+
+            <!-- Top Section -->
+            <div class="editor-top">
+
+                <div class="editor-heading">
+
+                    <div class="edit-badge">
+                        <span>✎</span>
+                    </div>
+
+                    <div>
+                        <span class="section-label">
+                            MESSAGE EDITOR
+                        </span>
+
+                        <h1>
+                            Edit message
+                        </h1>
+
+                        <p>
+                            Make your changes and update the conversation.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="edit-status">
+                    <span></span>
+                    Editing
+                </div>
+
+            </div>
+
+
+            <!-- Conversation -->
+            <div class="conversation-card">
+
+                <div class="conversation-person">
+
+                    <div class="profile-avatar sender-avatar">
+                        <%= chat.from.charAt(0).toUpperCase() %>
+                    </div>
+
+                    <div class="profile-details">
+
+                        <span>FROM</span>
+
+                        <strong>
+                            <%= chat.from %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="conversation-line">
+                    <div></div>
+                    <span>→</span>
+                    <div></div>
+                </div>
+
+
+                <div class="conversation-person">
+
+                    <div class="profile-avatar receiver-avatar">
+                        <%= chat.to.charAt(0).toUpperCase() %>
+                    </div>
+
+                    <div class="profile-details">
+
+                        <span>TO</span>
+
+                        <strong>
+                            <%= chat.to %>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Existing Message Preview -->
+            <div class="message-preview">
+
+                <div class="preview-header">
+
+                    <span>
+                        CURRENT MESSAGE
+                    </span>
+
+                    <span class="preview-icon">
+                        💬
+                    </span>
+
+                </div>
+
+                <div class="preview-message">
+                    <%= chat.msg %>
+                </div>
+
+            </div>
+
+
+            <!-- Form -->
+            <form
+                method="POST"
+                action="/chats/<%= chat._id %>?_method=PUT"
+                class="modern-edit-form"
+            >
+
+                <div class="editor-label-row">
+
+                    <label for="msg">
+                        Update your message
+                    </label>
+
+                    <span id="counter">
+                        <%= chat.msg.length %>/500
+                    </span>
+
+                </div>
+
+
+                <div class="modern-textarea">
+
+                    <textarea
+                        id="msg"
+                        name="msg"
+                        maxlength="500"
+                        placeholder="Write your updated message..."
+                        required
+                    ><%= chat.msg %></textarea>
+
+                    <div class="textarea-bottom">
+
+                        <span>
+                            Keep your message clear and concise.
+                        </span>
+
+                        <span class="textarea-icon">
+                            ↗
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Actions -->
+                <div class="editor-actions">
+
+                    <a
+                        href="/chats"
+                        class="secondary-action"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="primary-action"
+                    >
+
+                        <span class="save-icon">
+                            ✓
+                        </span>
+
+                        <span>
+                            Save Changes
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- Bottom Note -->
+        <div class="editor-footer">
+
+            <span class="footer-check">✓</span>
+
+            Changes will be saved to this conversation.
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const textarea = document.getElementById("msg");
+        const counter = document.getElementById("counter");
+
+        textarea.addEventListener("input", () => {
+
+            counter.textContent =
+                `${textarea.value.length}/500`;
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+

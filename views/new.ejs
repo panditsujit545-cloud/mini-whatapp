@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>New Chat | Mini WhatsApp</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/new.css">
+</head>
+
+<body>
+
+    <!-- Background Decoration -->
+    <div class="bg-circle circle-one"></div>
+    <div class="bg-circle circle-two"></div>
+
+
+    <main class="form-page">
+
+        <!-- Back Button -->
+        <a href="/chats" class="back-link">
+            ← Back to chats
+        </a>
+
+
+        <!-- Form Card -->
+        <section class="form-card">
+
+            <!-- Header -->
+            <div class="form-header">
+
+                <div class="form-icon">
+                    +
+                </div>
+
+                <span class="eyebrow">
+                    NEW CONVERSATION
+                </span>
+
+                <h1>
+                    Start a new chat
+                </h1>
+
+                <p>
+                    Send a message and start a conversation.
+                </p>
+
+            </div>
+
+
+            <!-- Form -->
+            <form action="/chats" method="POST" class="chat-form">
+
+
+                <!-- Sender -->
+                <div class="form-group">
+
+                    <label for="from">
+                        Your name
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            id="from"
+                            name="from"
+                            placeholder="Who are you?"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Receiver -->
+                <div class="form-group">
+
+                    <label for="to">
+                        Receiver
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ➜
+                        </span>
+
+                        <input
+                            type="text"
+                            id="to"
+                            name="to"
+                            placeholder="Who do you want to message?"
+                            autocomplete="off"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Message -->
+                <div class="form-group">
+
+                    <div class="label-row">
+
+                        <label for="msg">
+                            Message
+                        </label>
+
+                        <span>
+                            Write something...
+                        </span>
+
+                    </div>
+
+                    <div class="textarea-wrapper">
+
+                        <textarea
+                            id="msg"
+                            name="msg"
+                            placeholder="Write your message here..."
+                            maxlength="500"
+                            required
+                        ></textarea>
+
+                    </div>
+
+                    <div class="character-count">
+                        Maximum 500 characters
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="form-actions">
+
+                    <a href="/chats" class="cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="send-btn">
+
+                        <span>Send Message</span>
+
+                        <span class="send-icon">
+                            →
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- Small Footer -->
+        <p class="secure-text">
+            🔒 Your conversation is stored securely.
+        </p>
+
+    </main>
+
+
+    <!-- Character Counter -->
+    <script>
+
+        const message = document.getElementById("msg");
+        const counter = document.querySelector(".character-count");
+
+        message.addEventListener("input", function () {
+
+            const length = message.value.length;
+
+            counter.textContent =
+                `${length}/500 characters`;
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+

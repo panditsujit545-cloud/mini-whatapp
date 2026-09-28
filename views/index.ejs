@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mini WhatsApp | Chats</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+
+    <!-- Background Decoration -->
+    <div class="bg-circle circle-one"></div>
+    <div class="bg-circle circle-two"></div>
+
+    <main class="container">
+
+        <!-- Header -->
+        <header class="page-header">
+
+            <div>
+                <span class="eyebrow">MESSAGING APP</span>
+                <h1>Mini WhatsApp</h1>
+                <p class="subtitle">
+                    Your conversations, all in one place.
+                </p>
+            </div>
+
+            <form action="/chats/new" method="GET">
+                <button class="new-chat-btn" type="submit">
+                    <span class="plus">+</span>
+                    New Chat
+                </button>
+            </form>
+
+        </header>
+
+
+        <!-- Chat Count -->
+        <section class="chat-summary">
+            <div>
+                <span class="summary-label">TOTAL CONVERSATIONS</span>
+                <h2><%= chats.length %></h2>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                All systems active
+            </div>
+        </section>
+
+
+        <!-- Chats -->
+        <section class="chat-list">
+
+            <% if (chats.length === 0) { %>
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">💬</div>
+
+                    <h2>No chats yet</h2>
+
+                    <p>
+                        Start your first conversation by creating a new chat.
+                    </p>
+
+                    <form action="/chats/new" method="GET">
+                        <button class="empty-btn">
+                            Start a Conversation
+                        </button>
+                    </form>
+
+                </div>
+
+            <% } %>
+
+
+            <% for(let chat of chats) { %>
+
+                <article class="chat-card">
+
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+
+                        <div class="user-info">
+
+                            <div class="avatar">
+                                <%= chat.from.charAt(0).toUpperCase() %>
+                            </div>
+
+                            <div>
+                                <h3>
+                                    <%= chat.from %>
+                                </h3>
+
+                                <span class="recipient">
+                                    To <strong><%= chat.to %></strong>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="time">
+
+                            <span>
+                                <%= chat.created_at.toString().split(" ")[4] %>
+                            </span>
+
+                            <small>
+                                <%= chat.created_at.toString().split(" ").slice(0,4).join(" ") %>
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Message -->
+                    <div class="message-wrapper">
+
+                        <div class="message-bubble">
+                            <p>
+                                <%= chat.msg %>
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Actions -->
+                    <div class="chat-footer">
+
+                        <span class="message-status">
+                            ✓ Message delivered
+                        </span>
+
+                        <div class="actions">
+
+                            <form method="GET"
+                                  action="/chats/<%= chat._id %>/edit">
+
+                                <button
+                                    type="submit"
+                                    class="action-btn edit-btn">
+                                    ✎ Edit
+                                </button>
+
+                            </form>
+
+
+                            <form method="POST"
+                                  action="/chats/<%= chat._id %>?_method=DELETE"
+                                  onsubmit="return confirm('Are you sure you want to delete this chat?');">
+
+                                <button
+                                    type="submit"
+                                    class="action-btn delete-btn">
+                                    🗑 Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            <% } %>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
+
